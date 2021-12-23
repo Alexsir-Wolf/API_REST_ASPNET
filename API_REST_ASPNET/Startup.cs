@@ -1,7 +1,11 @@
+using API_REST_ASPNET.Model.Context;
+using API_REST_ASPNET.Services;
+using API_REST_ASPNET.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +29,16 @@ namespace API_REST_ASPNET
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+
+            //Conector MYSQL
+            var connection = Configuration["MySQLConnection:MySQLConnectionString"];
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 25));
+            services.AddDbContext<MySQLContext>(
+                options => options.UseMySql(connection, serverVersion));
+
+            //injeção de dependencia
+            services.AddScoped<IPersonService, PersonServiceImplementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

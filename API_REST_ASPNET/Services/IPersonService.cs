@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace API_REST_ASPNET.Services
 {
-    interface IPersonService
+    public interface IPersonService
     {
         Person Create(Person person);
         Person FindByID(long id);
