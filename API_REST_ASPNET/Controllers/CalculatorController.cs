@@ -30,6 +30,60 @@ namespace API_REST_ASPNET.Controllers
 
             return BadRequest("Invalid Input");
         }
+        
+        
+        [HttpGet("subtracion/{firstNumber}/{secondNumber}")]
+        public IActionResult Subtracion(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var subtracion = ConvertToDecimal(firstNumber) - ConvertToDecimal(secondNumber);
+                return Ok(subtracion.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+        
+        
+        
+        [HttpGet("multiplication/{firstNumber}/{secondNumber}")]
+        public IActionResult Multiplication(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var multiplication = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
+                return Ok(multiplication.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+        
+        
+        
+        [HttpGet("division/{firstNumber}/{secondNumber}")]
+        public IActionResult Division(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var division = ConvertToDecimal(firstNumber) / ConvertToDecimal(secondNumber);
+                return Ok(division.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
+        
+        
+        [HttpGet("square-root/{firstNumber}")]
+        public IActionResult SquareRoot(string firstNumber)
+        {
+            if (IsNumeric(firstNumber))
+            {
+                var squareRoot = Math.Sqrt((double)ConvertToDecimal(firstNumber));
+                return Ok(squareRoot.ToString());
+            }
+
+            return BadRequest("Invalid Input");
+        }
 
         private bool IsNumeric(string strNumber)
         {
