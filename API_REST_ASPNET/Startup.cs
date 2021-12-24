@@ -37,6 +37,9 @@ namespace API_REST_ASPNET
             services.AddDbContext<MySQLContext>(
                 options => options.UseMySql(connection, serverVersion));
 
+            //Versionamento de API
+            services.AddApiVersioning();
+
             //injeção de dependencia
             services.AddScoped<IPersonService, PersonServiceImplementation>();
         }
